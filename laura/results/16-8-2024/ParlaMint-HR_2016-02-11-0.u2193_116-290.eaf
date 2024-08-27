@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2024-08-17T11:06:26+01:00"
+    FORMAT="3.0" VERSION="3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+    <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
+        <MEDIA_DESCRIPTOR
+            MEDIA_URL="file:///D:/SLUŽBA/2024/INŠTITUT-JŠ/DATOTEKE-ORIGINAL/HR-filledPause-1/16-8-2024/ParlaMint-HR_2016-02-11-0.u2193_116-290.wav"
+            MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="../../../DATOTEKE-ORIGINAL/HR-filledPause-1/16-8-2024/ParlaMint-HR_2016-02-11-0.u2193_116-290.wav"/>
+        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:9c8e46df-36bb-44c9-a1ab-2ae009e1589e</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">7</PROPERTY>
+    </HEADER>
+    <TIME_ORDER>
+        <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="4714"/>
+        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="4966"/>
+        <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="6866"/>
+        <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="7018"/>
+        <TIME_SLOT TIME_SLOT_ID="ts5" TIME_VALUE="7751"/>
+        <TIME_SLOT TIME_SLOT_ID="ts6" TIME_VALUE="7951"/>
+        <TIME_SLOT TIME_SLOT_ID="ts7" TIME_VALUE="9557"/>
+        <TIME_SLOT TIME_SLOT_ID="ts8" TIME_VALUE="9742"/>
+        <TIME_SLOT TIME_SLOT_ID="ts9" TIME_VALUE="13019"/>
+        <TIME_SLOT TIME_SLOT_ID="ts10" TIME_VALUE="13171"/>
+        <TIME_SLOT TIME_SLOT_ID="ts11" TIME_VALUE="13762"/>
+        <TIME_SLOT TIME_SLOT_ID="ts12" TIME_VALUE="13933"/>
+    </TIME_ORDER>
+    <TIER LINGUISTIC_TYPE_REF="default-lt" TIER_ID="default">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1"
+                TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts2">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a2"
+                TIME_SLOT_REF1="ts3" TIME_SLOT_REF2="ts4">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a3"
+                TIME_SLOT_REF1="ts5" TIME_SLOT_REF2="ts6">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a4"
+                TIME_SLOT_REF1="ts7" TIME_SLOT_REF2="ts8">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a6"
+                TIME_SLOT_REF1="ts9" TIME_SLOT_REF2="ts10">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a7"
+                TIME_SLOT_REF1="ts11" TIME_SLOT_REF2="ts12">
+                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false"
+        LINGUISTIC_TYPE_ID="default-lt" TIME_ALIGNABLE="true"/>
+    <CONSTRAINT
+        DESCRIPTION="Time subdivision of parent annotation's time interval, no time gaps allowed within this interval" STEREOTYPE="Time_Subdivision"/>
+    <CONSTRAINT
+        DESCRIPTION="Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered" STEREOTYPE="Symbolic_Subdivision"/>
+    <CONSTRAINT DESCRIPTION="1-1 association with a parent annotation" STEREOTYPE="Symbolic_Association"/>
+    <CONSTRAINT
+        DESCRIPTION="Time alignable annotations within the parent annotation's time interval, gaps are allowed" STEREOTYPE="Included_In"/>
+</ANNOTATION_DOCUMENT>
