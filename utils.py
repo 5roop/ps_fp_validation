@@ -2,6 +2,12 @@ from pathlib import Path
 
 
 def extract_annotations(p: str | Path) -> list:
+    """Reads EAF file and produces a list of (start_ms, end_ms)
+    tuples where filled pauses were annotated.
+
+    :param str | Path p: input EAF file
+    :return list:list of (start_ms, end_ms) filled pauses.
+    """
     from lxml import etree as ET
 
     doc = ET.fromstring(Path(p).read_bytes())
@@ -13,9 +19,8 @@ def extract_annotations(p: str | Path) -> list:
     }
     return [
         (
-            int(timeline[i.get("TIME_SLOT_REF1")]) / 1000,
-            int(timeline[i.get("TIME_SLOT_REF2")]) / 1000,
+            int(timeline[i.get("TIME_SLOT_REF1")]),
+            int(timeline[i.get("TIME_SLOT_REF2")]),
         )
         for i in ees
     ]
-
