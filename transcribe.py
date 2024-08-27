@@ -36,27 +36,7 @@ df = df.drop(columns="name")
 ds = datasets.Dataset.from_pandas(df)
 ds = ds.cast_column("audio", Audio(sampling_rate=16_000, mono=True))
 
-
-def frames_to_intervals(frames: list) -> list[tuple]:
-    return_list = []
-    ndf = pd.DataFrame(
-        data={
-            "millisecond": [20 * i for i in range(len(frames))],
-            "frames": frames,
-        }
-    )
-
-    ndf["millisecond"] = ndf.millisecond.astype(int)
-    ndf = ndf.dropna()
-    indices_of_change = ndf.frames.diff()[ndf.frames.diff() != 0].index.values
-    for si, ei in pairwise(indices_of_change):
-        if ndf.loc[si : ei - 1, "frames"].mode()[0] == 0:
-            pass
-        else:
-            return_list.append(
-                (ndf.loc[si, "millisecond"], ndf.loc[ei - 1, "millisecond"])
-            )
-    return return_list
+from utils import frames_to_intervals
 
 
 def evaluator(chunks):

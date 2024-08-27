@@ -24,3 +24,53 @@ def extract_annotations(p: str | Path) -> list:
         )
         for i in ees
     ]
+
+
+def is_overlapping(this, other):
+    if (this[0] < other[1]) and (this[1] > other[0]):
+        return True
+    return False
+
+
+
+def intervals_to_frames(intervals, duration_ms: int) -> list:
+    import pandas as pd
+
+    i = pd.interval_range(start=0, end=duration_ms, freq=20)
+    df = pd.DataFrame(
+        data={
+            "left": [ie.left for ie in i],
+            "right": [ie.right for ie in i],
+            "label": [0 for _ in i],
+        }
+    )
+    for a in intervals:
+        start_ms = a[0]
+        end_ms = a[1]
+        c = (df.right > start_ms) & (df.right < end_ms)
+        df.loc[c, "label"] = 1
+    return df.label.tolist()
+
+
+def frames_to_intervals(frames: list) -> list[tuple]:
+    import pandas as pd
+
+    return_list = []
+    ndf = pd.DataFrame(
+        data={
+            "millisecond": [20 * i for i in range(len(frames))],
+            "frames": frames,
+        }
+    )
+
+    ndf["millisecond"] = ndf.millisecond.astype(int)
+    ndf = ndf.dropna()
+    indices_of_change = ndf.frames.diff()[ndf.frames.diff() != 0].index.values
+    for si, ei in pairwise(indices_of_change):
+        if ndf.loc[si : ei - 1, "frames"].mode()[0] == 0:
+            pass
+        else:
+            return_list.append(
+                (ndf.loc[si, "millisecond"], ndf.loc[ei - 1, "millisecond"])
+            )
+    return return_list
