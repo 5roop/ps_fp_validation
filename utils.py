@@ -1,4 +1,5 @@
 from pathlib import Path
+from itertools import pairwise
 
 
 def extract_annotations(p: str | Path) -> list:
@@ -30,7 +31,6 @@ def is_overlapping(this, other):
     if (this[0] < other[1]) and (this[1] > other[0]):
         return True
     return False
-
 
 
 def intervals_to_frames(intervals, duration_ms: int) -> list:

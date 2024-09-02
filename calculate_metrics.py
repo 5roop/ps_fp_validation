@@ -95,4 +95,50 @@ print(
     sep="\n",
 )
 
+# Export the TP, FP, FN:
+from pydub import AudioSegment
+from pathlib import Path
+
+TP, FN, FP = [], [], []
+for i, row in subset.iterrows():
+    y_pred = row["y_pred"]
+    y_true = row["laura"]
+    found_audio = list(Path(".").glob(f"**/{row['name']}.wav"))[0]
+    AS = AudioSegment.from_file(found_audio)
+    while y_pred + y_true:
+        event = (y_pred + y_true)[0]
+        if any([is_overlapping(event, i) for i in y_pred + y_true if i != event]):
+            TP.append(
+                AS[event[0] - 400 : event[1] + 400] + AudioSegment.silent(duration=300)
+            )
+
+            y_pred = [
+                i for i in y_pred if (i != event) and (not is_overlapping(event, i))
+            ]
+            y_true = [
+                i for i in y_true if (i != event) and (not is_overlapping(event, i))
+            ]
+            continue
+        else:
+            if event in y_pred:
+                FP.append(
+                    AS[event[0] - 400 : event[1] + 400]
+                    + AudioSegment.silent(duration=300)
+                )
+                y_pred = [i for i in y_pred if i != event]
+                continue
+            else:  # Event is in y_true
+                FN.append(
+                    AS[event[0] - 400 : event[1] + 400]
+                    + AudioSegment.silent(duration=300)
+                )
+                y_true = [i for i in y_true if i != event]
+                continue
+
+if TP:
+    sum(TP).export("TP.mp3", format="mp3")
+if FN:
+    sum(FN).export("FN.mp3", format="mp3")
+if FP:
+    sum(FP).export("FP.mp3", format="mp3")
 2 + 2

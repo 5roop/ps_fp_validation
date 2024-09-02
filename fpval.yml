@@ -269,6 +269,7 @@ dependencies:
   - pyarrow-core=17.0.0=py312h9cafe31_1_cpu
   - pyarrow-hotfix=0.6=pyhd8ed1ab_0
   - pycparser=2.22=pyhd8ed1ab_0
+  - pydub=0.25.1=pyhd8ed1ab_0
   - pygments=2.15.1=py312h06a4308_1
   - pyparsing=3.0.9=py312h06a4308_0
   - pysocks=1.7.1=py312h06a4308_0
