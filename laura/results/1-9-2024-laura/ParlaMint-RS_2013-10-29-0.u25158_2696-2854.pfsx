@@ -2,7 +2,7 @@
 <preferences version="1.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
     <pref key="FrameSize">
-        <Object class="java.awt.Dimension">1289,824</Object>
+        <Object class="java.awt.Dimension">1289,818</Object>
     </pref>
     <pref key="LayoutManager.SelectedTabIndex">
         <Int>7</Int>
@@ -14,10 +14,10 @@
         <String>default</String>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>20</Long>
+        <Long>0</Long>
     </pref>
     <pref key="SignalViewer.ZoomLevel">
-        <Float>89.999954</Float>
+        <Float>100.00002</Float>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
@@ -70,10 +70,10 @@
         <String>BAS - WebMAUS Basic</String>
     </pref>
     <pref key="FrameLocation">
-        <Object class="java.awt.Point">295,157</Object>
+        <Object class="java.awt.Point">298,111</Object>
     </pref>
     <pref key="TimeLineViewer.ZoomLevel">
-        <Float>89.999954</Float>
+        <Float>100.00002</Float>
     </pref>
     <pref key="SelectionBeginTime">
         <Long>0</Long>
@@ -90,21 +90,21 @@
             <String>runMAUSBasic</String>
         </pref>
         <pref key="SignalUrl">
-            <String>D:/SLUŽBA/2024/INŠTITUT-JŠ/DATOTEKE-ORIGINAL/HR-filledPause-1/20-8-2024-3/ParlaMint-HR_2017-04-05-0.u36040_7237-7410.wav</String>
+            <String>D:/SLUŽBA/2024/INŠTITUT-JŠ/DATOTEKE-ORIGINAL/HR-RS-filledPause-2-bonus/2_bonus80percent/31-8-2024/ParlaMint-RS_2013-10-29-0.u25158_2696-2854.wav</String>
         </pref>
         <pref key="TextParamName">
             <String>TEXT</String>
         </pref>
     </prefGroup>
     <pref key="TimeScaleBeginTime">
-        <Long>0</Long>
+        <Long>10090</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>1879</Long>
+        <Long>15740</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="default">
-            <Object class="java.awt.Color">0,90,0</Object>
+            <Object class="java.awt.Color">0,160,0</Object>
         </pref>
     </prefGroup>
     <prefList key="MultiTierViewer.TierOrder">

@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2024-08-21T12:27:27+01:00"
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2024-08-30T18:15:16+01:00"
     FORMAT="3.0" VERSION="3.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
         <MEDIA_DESCRIPTOR
-            MEDIA_URL="file:///D:/SLUŽBA/2024/INŠTITUT-JŠ/DATOTEKE-ORIGINAL/HR-filledPause-1/20-8-2024-3/ParlaMint-HR_2017-04-05-0.u36040_7237-7410.wav"
-            MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="../../../DATOTEKE-ORIGINAL/HR-filledPause-1/20-8-2024-3/ParlaMint-HR_2017-04-05-0.u36040_7237-7410.wav"/>
-        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:2f9ffe79-c2a1-4543-b45e-ae0b41977822</PROPERTY>
-        <PROPERTY NAME="lastUsedAnnotationId">1</PROPERTY>
+            MEDIA_URL="file:///D:/SLUŽBA/2024/INŠTITUT-JŠ/DATOTEKE-ORIGINAL/HR-RS-filledPause-2-bonus/2_bonus80percent/30-8-2024/ParlaMint-HR_2016-11-23-0.u18228_216-325.wav"
+            MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="../../../DATOTEKE-ORIGINAL/HR-RS-filledPause-2-bonus/2_bonus80percent/30-8-2024/ParlaMint-HR_2016-11-23-0.u18228_216-325.wav"/>
+        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:5d0e1a23-bd70-4cf8-84f1-dcedc9611dea</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">0</PROPERTY>
     </HEADER>
-    <TIME_ORDER>
-        <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="911"/>
-        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="1100"/>
-    </TIME_ORDER>
-    <TIER LINGUISTIC_TYPE_REF="default-lt" TIER_ID="default">
-        <ANNOTATION>
-            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1"
-                TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts2">
-                <ANNOTATION_VALUE>eee</ANNOTATION_VALUE>
-            </ALIGNABLE_ANNOTATION>
-        </ANNOTATION>
-    </TIER>
+    <TIME_ORDER/>
+    <TIER LINGUISTIC_TYPE_REF="default-lt" TIER_ID="default"/>
     <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false"
         LINGUISTIC_TYPE_ID="default-lt" TIME_ALIGNABLE="true"/>
     <CONSTRAINT
