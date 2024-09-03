@@ -8,7 +8,9 @@ from utils import intervals_to_frames
 df = pd.read_json("y_pred_y_true.jsonl", lines=True)
 
 print(
-    f"Laura annotated {df.laura.notna().sum()} instances, Lara annotated {df.lara.notna().sum()} instances."
+    f"Laura annotated {df.laura.notna().sum()} instances, Lara annotated {df.lara.notna().sum()} instances.",
+    f"Intersection is {(df.laura.notna() & df.lara.notna()).sum()}",
+    sep="\n",
 )
 # Inter-annotator agreement
 iaa = df[df.lara.notna() & df.laura.notna()].copy()
@@ -27,7 +29,7 @@ laura_frames = [i for j in iaa.laura_frames.values for i in j]
 data = np.array([lara_frames, laura_frames])
 
 
-print("Krippendorff alpha on frame-by-frame level: ", krippendorff.alpha(data))
+print(f"Krippendorff alpha on frame-by-frame level:  {krippendorff.alpha(data):0.3f}")
 
 lara_events, laura_events = [], []
 for i, row in iaa.iterrows():
@@ -48,8 +50,7 @@ for i, row in iaa.iterrows():
                 laura_events.append(1)
                 lara_events.append(0)
 print(
-    "Krippendorff alpha on event level: ",
-    krippendorff.alpha(np.array([lara_events, laura_events])),
+    f"Krippendorff alpha on event level: {krippendorff.alpha(np.array([lara_events, laura_events])):0.3f}",
 )
 
 # Performance of our classifier on Laura:
@@ -94,7 +95,6 @@ print(
     classification_report(laura_events, y_pred_events),
     sep="\n",
 )
-
 
 
 subset = df[df.lara.notna()].copy()
