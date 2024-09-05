@@ -52,131 +52,131 @@ for i, row in iaa.iterrows():
 print(
     f"Krippendorff alpha on event level: {krippendorff.alpha(np.array([lara_events, laura_events])):0.3f}",
 )
+for country in "RS HR".split():
+    # Performance of our classifier on Laura:
+    print(f"Performance on {country}:")
+    subset = df[df.laura.notna() & df.name.str.contains(country)].copy()
+    subset["laura_frames"] = subset.apply(
+        lambda row: intervals_to_frames(row["laura"], duration_ms=row["duration"]), axis=1
+    )
+    subset["y_pred_frames"] = subset.apply(
+        lambda row: intervals_to_frames(row["y_pred"], duration_ms=row["duration"]), axis=1
+    )
+    y_pred_frames = [i for j in subset.y_pred_frames.values for i in j]
+    laura_frames = [i for j in subset.laura_frames.values for i in j]
 
-# Performance of our classifier on Laura:
 
-subset = df[df.laura.notna()].copy()
-subset["laura_frames"] = subset.apply(
-    lambda row: intervals_to_frames(row["laura"], duration_ms=row["duration"]), axis=1
-)
-subset["y_pred_frames"] = subset.apply(
-    lambda row: intervals_to_frames(row["y_pred"], duration_ms=row["duration"]), axis=1
-)
-y_pred_frames = [i for j in subset.y_pred_frames.values for i in j]
-laura_frames = [i for j in subset.laura_frames.values for i in j]
+    print(
+        "Classification report for Laura vs y_pred on frame-by-frame level:",
+        classification_report(laura_frames, y_pred_frames),
+        sep="\n",
+    )
 
-
-print(
-    "Classification report for Laura vs y_pred on frame-by-frame level:",
-    classification_report(laura_frames, y_pred_frames),
-    sep="\n",
-)
-
-y_pred_events, laura_events = [], []
-for i, row in subset.iterrows():
-    y_pred = row["y_pred"]
-    laura = row["laura"]
-    if (y_pred == []) and (laura == []):
-        y_pred_events.append(0)
-        laura_events.append(0)
-    for l in y_pred + laura:
-        if any([is_overlapping(l, x) for x in y_pred + laura if x != l]):
-            y_pred_events.append(1)
-            laura_events.append(1)
-        else:
-            if l in y_pred:
+    y_pred_events, laura_events = [], []
+    for i, row in subset.iterrows():
+        y_pred = row["y_pred"]
+        laura = row["laura"]
+        if (y_pred == []) and (laura == []):
+            y_pred_events.append(0)
+            laura_events.append(0)
+        for l in y_pred + laura:
+            if any([is_overlapping(l, x) for x in y_pred + laura if x != l]):
                 y_pred_events.append(1)
-                laura_events.append(0)
-            else:
                 laura_events.append(1)
-                y_pred_events.append(0)
-print(
-    "Classification report for Laura vs y_pred on event level: ",
-    classification_report(laura_events, y_pred_events),
-    sep="\n",
-)
-
-
-subset = df[df.lara.notna()].copy()
-subset["lara_frames"] = subset.apply(
-    lambda row: intervals_to_frames(row["lara"], duration_ms=row["duration"]), axis=1
-)
-subset["y_pred_frames"] = subset.apply(
-    lambda row: intervals_to_frames(row["y_pred"], duration_ms=row["duration"]), axis=1
-)
-y_pred_frames = [i for j in subset.y_pred_frames.values for i in j]
-lara_frames = [i for j in subset.lara_frames.values for i in j]
-
-
-print(
-    "Classification report for Lara vs y_pred on frame-by-frame level:",
-    classification_report(lara_frames, y_pred_frames),
-    sep="\n",
-)
-
-y_pred_events, lara_events = [], []
-for i, row in subset.iterrows():
-    y_pred = row["y_pred"]
-    lara = row["lara"]
-    if (y_pred == []) and (lara == []):
-        y_pred_events.append(0)
-        lara_events.append(0)
-    for l in y_pred + lara:
-        if any([is_overlapping(l, x) for x in y_pred + lara if x != l]):
-            y_pred_events.append(1)
-            lara_events.append(1)
-        else:
-            if l in y_pred:
-                y_pred_events.append(1)
-                lara_events.append(0)
             else:
-                lara_events.append(1)
-                y_pred_events.append(0)
-print(
-    "Classification report for Lara vs y_pred on event level: ",
-    classification_report(lara_events, y_pred_events),
-    sep="\n",
-)
+                if l in y_pred:
+                    y_pred_events.append(1)
+                    laura_events.append(0)
+                else:
+                    laura_events.append(1)
+                    y_pred_events.append(0)
+    print(
+        "Classification report for Laura vs y_pred on event level: ",
+        classification_report(laura_events, y_pred_events),
+        sep="\n",
+    )
 
-# Export the TP, FP, FN:
-from pydub import AudioSegment
-from pathlib import Path
 
-TP, FN, FP = [], [], []
-for i, row in subset.iterrows():
-    y_pred = row["y_pred"]
-    y_true = row["laura"]
-    found_audio = list(Path(".").glob(f"**/{row['name']}.wav"))[0]
-    AS = AudioSegment.from_file(found_audio)
-    while y_pred + y_true:
-        event = (y_pred + y_true)[0]
-        if any([is_overlapping(event, i) for i in y_pred + y_true if i != event]):
-            TP.append(
-                AS[event[0] - 400 : event[1] + 400] + AudioSegment.silent(duration=300)
-            )
+    # subset = df[df.lara.notna()].copy()
+    # subset["lara_frames"] = subset.apply(
+    #     lambda row: intervals_to_frames(row["lara"], duration_ms=row["duration"]), axis=1
+    # )
+    # subset["y_pred_frames"] = subset.apply(
+    #     lambda row: intervals_to_frames(row["y_pred"], duration_ms=row["duration"]), axis=1
+    # )
+    # y_pred_frames = [i for j in subset.y_pred_frames.values for i in j]
+    # lara_frames = [i for j in subset.lara_frames.values for i in j]
 
-            y_pred = [
-                i for i in y_pred if (i != event) and (not is_overlapping(event, i))
-            ]
-            y_true = [
-                i for i in y_true if (i != event) and (not is_overlapping(event, i))
-            ]
-            continue
-        else:
-            if event in y_pred:
-                FP.append(
-                    AS[event[0] - 400 : event[1] + 400]
-                    + AudioSegment.silent(duration=300)
+
+    # print(
+    #     "Classification report for Lara vs y_pred on frame-by-frame level:",
+    #     classification_report(lara_frames, y_pred_frames),
+    #     sep="\n",
+    # )
+
+    # y_pred_events, lara_events = [], []
+    # for i, row in subset.iterrows():
+    #     y_pred = row["y_pred"]
+    #     lara = row["lara"]
+    #     if (y_pred == []) and (lara == []):
+    #         y_pred_events.append(0)
+    #         lara_events.append(0)
+    #     for l in y_pred + lara:
+    #         if any([is_overlapping(l, x) for x in y_pred + lara if x != l]):
+    #             y_pred_events.append(1)
+    #             lara_events.append(1)
+    #         else:
+    #             if l in y_pred:
+    #                 y_pred_events.append(1)
+    #                 lara_events.append(0)
+    #             else:
+    #                 lara_events.append(1)
+    #                 y_pred_events.append(0)
+    # print(
+    #     "Classification report for Lara vs y_pred on event level: ",
+    #     classification_report(lara_events, y_pred_events),
+    #     sep="\n",
+    # )
+
+    # Export the TP, FP, FN:
+    from pydub import AudioSegment
+    from pathlib import Path
+
+    TP, FN, FP = [], [], []
+    for i, row in subset.iterrows():
+        y_pred = row["y_pred"]
+        y_true = row["laura"]
+        found_audio = list(Path(".").glob(f"**/{row['name']}.wav"))[0]
+        AS = AudioSegment.from_file(found_audio)
+        while y_pred + y_true:
+            event = (y_pred + y_true)[0]
+            if any([is_overlapping(event, i) for i in y_pred + y_true if i != event]):
+                TP.append(
+                    AS[event[0] - 400 : event[1] + 400] + AudioSegment.silent(duration=300)
                 )
-                y_pred = [i for i in y_pred if i != event]
+
+                y_pred = [
+                    i for i in y_pred if (i != event) and (not is_overlapping(event, i))
+                ]
+                y_true = [
+                    i for i in y_true if (i != event) and (not is_overlapping(event, i))
+                ]
                 continue
-            else:  # Event is in y_true
-                FN.append(
-                    AS[event[0] - 400 : event[1] + 400]
-                    + AudioSegment.silent(duration=300)
-                )
-                y_true = [i for i in y_true if i != event]
-                continue
+            else:
+                if event in y_pred:
+                    FP.append(
+                        AS[event[0] - 400 : event[1] + 400]
+                        + AudioSegment.silent(duration=300)
+                    )
+                    y_pred = [i for i in y_pred if i != event]
+                    continue
+                else:  # Event is in y_true
+                    FN.append(
+                        AS[event[0] - 400 : event[1] + 400]
+                        + AudioSegment.silent(duration=300)
+                    )
+                    y_true = [i for i in y_true if i != event]
+                    continue
 
 if TP:
     sum(TP).export("TP.mp3", format="mp3")
