@@ -53,6 +53,12 @@ def intervals_to_frames(intervals, duration_ms: int) -> list:
 
 
 def frames_to_intervals(frames: list) -> list[tuple]:
+    """Takes the 50Hz frames [0,1,1,1,1,0,0,0...] and decodes contiguous
+    sections with 1 to milliseconds [[start_ms, end_ms], ...]
+
+    :param list frames: 50Hz frames of zeros and ones
+    :return list[tuple]: list of []
+    """
     import pandas as pd
 
     return_list = []

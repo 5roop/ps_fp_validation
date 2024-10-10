@@ -15,11 +15,12 @@ from datasets import load_dataset, load_metric, Audio
 from itertools import zip_longest, pairwise
 from pathlib import Path
 
-
+os.environ["WANDB_DISABLED"] = "true"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 device = torch.device("cuda")
 TARGET = "filledPause"
 checkpoint = Path(
-    f"../mezzanine_resources/ML2/model_{TARGET}_3e-5_20_4/checkpoint-1040"
+    f"../mezzanine_resources/filled_pauses/model_{TARGET}_3e-5_20_4/checkpoint-900"
 )
 feature_extractor = AutoFeatureExtractor.from_pretrained(str(checkpoint))
 model = Wav2Vec2BertForAudioFrameClassification.from_pretrained(str(checkpoint)).to(
