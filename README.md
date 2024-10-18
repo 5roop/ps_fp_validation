@@ -8,4 +8,5 @@ mamba activate fpval
 
 python transcribe.py
 python add_gold.py
+python calculate_metrics.py
 ```
